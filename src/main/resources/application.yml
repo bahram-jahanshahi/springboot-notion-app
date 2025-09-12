@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: Springboot Notion App
+  config:
+    import: notion.yml
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+server:
+  port: 8080
+
