@@ -7,10 +7,7 @@ import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import se.bahram.ai.springboot_notion_app.domain.RepoFacts;
 import se.bahram.ai.springboot_notion_app.domain.enums.GitHubTrendingDateRange;
-import se.bahram.ai.springboot_notion_app.services.AddBookToNotionAppDatabaseService;
-import se.bahram.ai.springboot_notion_app.services.GitHubFactsService;
-import se.bahram.ai.springboot_notion_app.services.GitHubTrendingScraper;
-import se.bahram.ai.springboot_notion_app.services.NotionProbeService;
+import se.bahram.ai.springboot_notion_app.services.*;
 
 import java.util.List;
 import java.util.Map;
@@ -29,6 +26,9 @@ public class SpringbootNotionAppApplication implements CommandLineRunner {
 
 	@Autowired
 	GitHubFactsService gitHubFactsService;
+
+	@Autowired
+	ReadmeFactsService readmeFactsService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootNotionAppApplication.class, args);
@@ -56,6 +56,9 @@ public class SpringbootNotionAppApplication implements CommandLineRunner {
 					System.out.println("Repo: " + repo);
 					RepoFacts facts = gitHubFactsService.fetchFacts(repo.owner(), repo.repo(), repo.starsToday(), null);
 					System.out.println("Facts: " + facts);
+					var readmeFacts = readmeFactsService.extract(repo.owner(), repo.repo());
+					System.out.println("ReadmeFacts: " + readmeFacts);
+					System.out.println("------------------------------");
 				});
 	}
 }
