@@ -9,6 +9,7 @@ import se.bahram.ai.springboot_notion_app.services.AddBookToNotionAppDatabaseSer
 import se.bahram.ai.springboot_notion_app.services.NotionProbeService;
 
 import java.util.List;
+import java.util.Map;
 
 @SpringBootApplication
 public class SpringbootNotionAppApplication implements CommandLineRunner {
@@ -30,7 +31,7 @@ public class SpringbootNotionAppApplication implements CommandLineRunner {
 		System.out.println(
 				notionProbeService.getDb("26c0009438af8070bd41faa490c5b164"));
 
-		addBookToNotionAppDatabaseService.createBookPage(
+		Map<String, Object> response = addBookToNotionAppDatabaseService.createBookPage(
 				"Book from Spring Boot Application",
 				"Bahram",
 				"1234567890",
@@ -38,5 +39,6 @@ public class SpringbootNotionAppApplication implements CommandLineRunner {
 				"2023-10-01",
 				List.of("Spring Boot", "Notion API", "Java")
 		);
+		System.out.println("Response from Notion API: " + response);
 	}
 }

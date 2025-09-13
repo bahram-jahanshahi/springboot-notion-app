@@ -46,7 +46,13 @@ public class AddBookToNotionAppDatabaseService {
         Map<String, Object> requestBody = Map.of(
                 //"parent", Map.of("database_id", databaseId),
                 "parent", Map.of( "type", "data_source_id", "data_source_id", dataSourceId),
-                "properties", buildProperties(name, author, isbn, price, publishedISO, tags)
+                "properties", buildProperties(name, author, isbn, price, publishedISO, tags),
+                "children", List.of(
+                        Map.of("object","block","type","heading_2",
+                                "heading_2", Map.of("rich_text", List.of(Map.of("text", Map.of("content","Notes"))))),
+                        Map.of("object","block","type","paragraph",
+                                "paragraph", Map.of("rich_text", List.of(Map.of("text", Map.of("content","First note.")))))
+                )
         );
 
 
